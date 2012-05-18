@@ -906,12 +906,14 @@ class libnetvirt_endpoint(object):
 
     def __init__(self, ocni_libnetvirt_endpoint_uuid='', ocni_libnetvirt_endpoint_swid='',
                 ocni_libnetvirt_endpoint_port='',  ocni_libnetvirt_endpoint_vlan='', 
-                ocni_libnetvirt_endpoint_mpls='',):
+                ocni_libnetvirt_endpoint_mpls='', ocni_libnetvirt_endpoint_address='',ocni_libnetvirt_endpoint_mask='',):
         self.ocni_libnetvirt_endpoint_uuid = ocni_libnetvirt_endpoint_uuid
         self.ocni_libnetvirt_endpoint_swid = ocni_libnetvirt_endpoint_swid
         self.ocni_libnetvirt_endpoint_port = ocni_libnetvirt_endpoint_port
         self.ocni_libnetvirt_endpoint_vlan = ocni_libnetvirt_endpoint_vlan
         self.ocni_libnetvirt_endpoint_mpls = ocni_libnetvirt_endpoint_mpls
+        self.ocni_libnetvirt_endpoint_address = ocni_libnetvirt_endpoint_address
+        self.ocni_libnetvirt_endpoint_mask = ocni_libnetvirt_endpoint_mask
            
     def __repr__(self, *args, **kwargs):
         return repr([self.ocni_libnetvirt_endpoint_uuid, 
@@ -945,8 +947,7 @@ class libnetvirt_constraint(object):
                     self.ocni_libnetvirt_constraint_min_bandwidth,
                     self.ocni_libnetvirt_constraint_max_bandwidth
                     ]) 
-    
-    
+
  
 class libnetvirt(Mixin):
     """
@@ -958,6 +959,7 @@ class libnetvirt(Mixin):
     def __init__(self, ocni_libnetvirt_uuid='',
                  ocni_libnetvirt_of_controller='127.0.0.1',
                  ocni_libnetvirt_of_controller_port='2000',
+                 ocni_libnetvirt_service_type='L2',
                  ocni_libnetvirt_endpoint=(libnetvirt_endpoint(),),
                  ocni_libnetvirt_constraint=(libnetvirt_constraint(),)):
         super(libnetvirt, self).__init__(term='libnetvirt',
@@ -966,6 +968,7 @@ class libnetvirt(Mixin):
                                     attributes=(Attribute(name='ocni.libnetvirt.uuid', mutable=True, required=True),
                                                 Attribute(name='ocni.libnetvirt.of_controller', mutable=True, multiplicity='0..1', required=False),
                                                 Attribute(name='ocni.libnetvirt.of_controller_port', mutable=True, multiplicity='0..1', required=False),
+                                                Attribute(name='ocni.libnetvirt.service_type', mutable=True, multiplicity='0..1', required=False),
                                                 Attribute(name='ocni.libnetvirt.endpoint',
                                                           multiplicity='1..*',
                                                           type='pyocni.specification.ocni.libnetvirt_endpoint',
@@ -1009,6 +1012,13 @@ class libnetvirt(Mixin):
         self.ocni_libnetvirt_endpoint = ocni_libnetvirt_endpoint
         
         self.ocni_libnetvirt_constraint = ocni_libnetvirt_constraint
+        
+        # ... service_type
+        # ocni_libnetvirt_of_controller
+        # @AttributeType String
+        # @AttributeMultiplicity 0..1
+        # @AttributeMutability mutable
+        self.ocni_libnetvirt_service_type = ocni_libnetvirt_service_type
 
 
 
