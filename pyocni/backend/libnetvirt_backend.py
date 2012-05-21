@@ -223,7 +223,7 @@ class libnetvirt_backend(backend):
                                             int(ep.ocni_libnetvirt_endpoint_swid),
                                             int(ep.ocni_libnetvirt_endpoint_port),
                                             int(ep.ocni_libnetvirt_endpoint_vlan),
-                                            ep.ocni_libnetvirt_endpoint_address)
+                                            ep.ocni_libnetvirt_endpoint_address+'/'+ep.ocni_libnetvirt_endpoint_mask)
                 index = index + 1
             
             libnetvirt.libnetvirt_modify_fns_add(info,fns);
@@ -253,7 +253,7 @@ class libnetvirt_backend(backend):
                                             int(ep.ocni_libnetvirt_endpoint_swid),
                                             int(ep.ocni_libnetvirt_endpoint_port),
                                             int(ep.ocni_libnetvirt_endpoint_vlan),
-                                            ep.ocni_libnetvirt_endpoint_address)
+                                            ep.ocni_libnetvirt_endpoint_address+'/'+ep.ocni_libnetvirt_endpoint_mask)
                 index = index + 1
             
             libnetvirt.libnetvirt_modify_fns_del(info,fns);
@@ -282,11 +282,19 @@ class libnetvirt_backend(backend):
         info = self.init_libnetvirt(type, entity)
         if info < 0:
             return
-        
+
         fns = libnetvirt.create_local_fns(int(entity.ocni_libnetvirt_uuid),
-                                          0,
+                                          len(entity.ocni_libnetvirt_endpoint),
                                           entity.occi_core_id,type)
-        
+        index = 0
+        for ep in entity.ocni_libnetvirt_endpoint:
+            libnetvirt.add_local_epoint_l3(fns, index,
+                                            long(ep.ocni_libnetvirt_endpoint_uuid),
+                                            int(ep.ocni_libnetvirt_endpoint_swid),
+                                            int(ep.ocni_libnetvirt_endpoint_port),
+                                            int(ep.ocni_libnetvirt_endpoint_vlan),
+                                            ep.ocni_libnetvirt_endpoint_address+'/'+ep.ocni_libnetvirt_endpoint_mask)
+            index = index + 1
          # Send command
         libnetvirt.libnetvirt_remove_fns(info,fns);
         logger.debug('Removing fns sent')
