@@ -119,12 +119,14 @@ class libnetvirt_backend(backend):
         
         # Check if the mixin is libnetvirt
         if str(entity.mixins[0]['term']) != 'libnetvirt':
+            logger.debug('Wrong mixin')
             return
         
         # Initialize and connect libnetvirt
         type = self.getType(entity.ocni_libnetvirt_service_type)
         info = self.init_libnetvirt(type, entity)
         if info < 0:
+            logger.error ("Error while connecting to driver")
             return
 
 
