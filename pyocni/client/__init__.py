@@ -35,51 +35,51 @@ if __name__ == '__main__':
     #    ====== Retrieval of all registered Kinds and Mixins  ======
     #    curl -X GET -H 'accept: application/json:occi' -v http://127.0.0.1:8090/-/
 
-#    print ('========================================================================================================')
-#    print ('sending the request: Retrieval of all registered Kinds and Mixins...')
-#    resp, content = h.request('http://127.0.0.1:8090/-/',
-#                              'GET',
-#                              headers={'content-type': 'application/json:occi', 'accept': 'application/json:occi'},
-#                              body='')
-#    print('********** The response header **********')
-#    pprint.pprint(resp)
-#    print('********** The content **********')
-#    print(content)
-
-    #    ================= Creation of Resource instance (Compute) =================
-    # curl -X POST -d@post_compute.json -H 'content-type: application/json:occi' -v http://157.159.249.133:8090/compute/
     print ('========================================================================================================')
-    print ('sending the request: Creation of Resource instance (compute) ')
-    resp, content = h.request('http://157.159.249.33:8090/compute/',
-                              'POST',
+    print ('sending the request: Retrieval of all registered Kinds and Mixins...')
+    resp, content = h.request('http://127.0.0.1:8090/-/',
+                              'GET',
                               headers={'content-type': 'application/json:occi', 'accept': 'application/json:occi'},
-                              body='''
-    {
-        "kind": {
-            "term": "compute",
-            "scheme": "http://schemas.ogf.org/occi/infrastructure",
-            "class": "kind"
-        },
-        "occi.core.id": "compute107",
-        "occi.core.title": "compute107 created by Houssem",
-        "occi.core.summary": "a summary of Compute 107 resource",
-        "mixins": [ ],
-        "links": ["a", "b"],
-        "attributes": {
-            "occi.compute.architecture": "x86_64",
-            "occi.compute.state": "active",
-            "occi.compute.speed": 1.0,
-            "occi.compute.memory": 512,
-            "occi.compute.cores": 1,
-            "occi.compute.hostname": "compute107"
-        }
-    }
-    ''')
-
+                              body='')
     print('********** The response header **********')
     pprint.pprint(resp)
     print('********** The content **********')
     print(content)
+
+    #    ================= Creation of Resource instance (Compute) =================
+    # curl -X POST -d@post_compute.json -H 'content-type: application/json:occi' -v http://157.159.249.133:8090/compute/
+    #print ('========================================================================================================')
+    #print ('sending the request: Creation of Resource instance (compute) ')
+    #resp, content = h.request('http://157.159.249.33:8090/compute/',
+    #                         'POST',
+    #                          headers={'content-type': 'application/json:occi', 'accept': 'application/json:occi'},
+    #                          body='''
+#    {
+#        "kind": {
+#            "term": "compute",
+#            "scheme": "http://schemas.ogf.org/occi/infrastructure",
+#            "class": "kind"
+#        },
+#        "occi.core.id": "compute107",
+#        "occi.core.title": "compute107 created by Houssem",
+#        "occi.core.summary": "a summary of Compute 107 resource",
+#        "mixins": [ ],
+#        "links": ["a", "b"],
+#        "attributes": {
+#            "occi.compute.architecture": "x86_64",
+#            "occi.compute.state": "active",
+#            "occi.compute.speed": 1.0,
+#            "occi.compute.memory": 512,
+#            "occi.compute.cores": 1,
+#            "occi.compute.hostname": "compute107"
+#        }
+#    }
+#    ''')
+#
+#    print('********** The response header **********')
+#    pprint.pprint(resp)
+#    print('********** The content **********')
+#    print(content)
 #
 #    #    ================= Creation of Resource instance (network) with ipnetwork mixin  =================
 #    #    curl -X POST -d@post_network_ipnetwork.json -H 'content-type: application/json:occi' -v http://157.159.249.133:8090/network/

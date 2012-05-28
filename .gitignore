@@ -38,7 +38,9 @@ Thumbs.db
 # Folders #
 ###################### 
 .idea/
-build
+build/
+dist/
+pyocni.egg-info/
 
 # ZODB - Database Files #
 #########################
