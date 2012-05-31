@@ -103,9 +103,8 @@ return_code = {'OK': 200,
 # ======================================================================================
 # Reinialization of the locations registry and objects registry (clear ZODB)
 # ======================================================================================
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "   Do you want to purge 'locations' and 'objects' Databases (DB  reinialization)?", "no")
-if result == 'yes':
+
+if config.OCNI_PURGE_DB == "1":
     location_registry().purge_locations_db()
     location_registry().purge_objects_db()
 
@@ -192,30 +191,23 @@ location_registry().register_location("/libnetvirt/", libnetvirt())
 # ======================================================================================
 # the Backend registry
 # ======================================================================================
-
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "   Do you want to register the dummy backend ?", "yes")
-if result == 'yes':
+                         
+if config.OCNI_DUMMY == "1":
     backend_registry().register_backend(dummy_backend())
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "   Do you want to register the OpenFlow backend ?", "no")
-if result == 'yes':
+
+if config.OCNI_OPENFLOW == "1":
     backend_registry().register_backend(openflow_backend())
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "    Do you want to register the L3VPN backend ?", "no")
-if result == 'yes':
+
+if config.OCNI_L3VPN  == "1":
     backend_registry().register_backend(l3vpn_backend())
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "    Do you want to register the OpenNebula backend ?", "no")
-if result == 'yes':
+
+if config.OCNI_OPENNEBULA == "1":
     backend_registry().register_backend(opennebula_backend())
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "    Do you want to register the OpenStack backend ?", "no")
-if result == 'yes':
+
+if config.OCNI_OPENSTACK == "1":
     backend_registry().register_backend(openstack_backend())
-result = shell_ask.query_yes_no_quit(" \n_______________________________________________________________\n"
-                                     "    Do you want to register the libnetvirt backend ?", "no")
-if result == 'yes':
+
+if config.OCNI_LIBNETVIRT == "1":
     backend_registry().register_backend(libnetvirt_backend())
 
 class QueryInterface(object):
