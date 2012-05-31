@@ -195,8 +195,8 @@ class libnetvirt_backend(backend):
             return
         
         # Initialize and connect libnetvirt
-        type = self.getType(entity.ocni_libnetvirt_service_type)
-        info = self.init_libnetvirt(type, entity)
+        type = self.getType(new_entity.ocni_libnetvirt_service_type)
+        info = self.init_libnetvirt(type, new_entity)
         if info < 0:
             return
         
