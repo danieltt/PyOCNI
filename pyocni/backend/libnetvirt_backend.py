@@ -236,7 +236,7 @@ class libnetvirt_backend(backend):
             logger.debug(ep_rem)
             fns = libnetvirt.create_local_fns(int(new_entity.ocni_libnetvirt_uuid),
                                           len(ep_rem),
-                                          new_entity.occi_core_id)
+                                          new_entity.occi_core_id,type)
             # Loop with all the endpoints
             index = 0
             for ep in ep_rem:
