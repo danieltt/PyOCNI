@@ -300,7 +300,7 @@ class libnetvirt_backend(backend):
                                                 ep.ocni_libnetvirt_endpoint_address+'/'+ep.ocni_libnetvirt_endpoint_mask)
                 index = index + 1
              # Send command
-            libnetvirt.libnetvirt_remove_fns(info,fns);
+        libnetvirt.libnetvirt_remove_fns(info,fns);
         logger.debug('Removing fns sent')
         # Stop communication        
         libnetvirt.libnetvirt_stop(info)
