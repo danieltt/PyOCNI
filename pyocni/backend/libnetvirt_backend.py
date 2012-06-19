@@ -289,16 +289,18 @@ class libnetvirt_backend(backend):
                                           len(entity.ocni_libnetvirt_endpoint),
                                           entity.occi_core_id,type)
         index = 0
-        for ep in entity.ocni_libnetvirt_endpoint:
-            libnetvirt.add_local_epoint_l3(fns, index,
-                                            long(ep.ocni_libnetvirt_endpoint_uuid),
-                                            int(ep.ocni_libnetvirt_endpoint_swid),
-                                            int(ep.ocni_libnetvirt_endpoint_port),
-                                            int(ep.ocni_libnetvirt_endpoint_vlan),
-                                            ep.ocni_libnetvirt_endpoint_address+'/'+ep.ocni_libnetvirt_endpoint_mask)
-            index = index + 1
-         # Send command
-        libnetvirt.libnetvirt_remove_fns(info,fns);
+        if type == libnetvirt.LIBNETVIRT_FORWARDING_L3VPN:
+            for ep in entity.ocni_libnetvirt_endpoint:
+                ep = self.ep_check(ep)
+                libnetvirt.add_local_epoint_l3(fns, index,
+                                                long(ep.ocni_libnetvirt_endpoint_uuid),
+                                                int(ep.ocni_libnetvirt_endpoint_swid),
+                                                int(ep.ocni_libnetvirt_endpoint_port),
+                                                int(ep.ocni_libnetvirt_endpoint_vlan),
+                                                ep.ocni_libnetvirt_endpoint_address+'/'+ep.ocni_libnetvirt_endpoint_mask)
+                index = index + 1
+             # Send command
+            libnetvirt.libnetvirt_remove_fns(info,fns);
         logger.debug('Removing fns sent')
         # Stop communication        
         libnetvirt.libnetvirt_stop(info)
